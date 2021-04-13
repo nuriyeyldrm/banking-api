@@ -1,0 +1,8 @@
+{
+  "isError": false,
+  "referenceNumber": 250,
+  "senderAccountNumber":123,
+  "receiverAccountNumber":156,
+  "amount":23.45,
+  "currencyCode":"TRY"
+}

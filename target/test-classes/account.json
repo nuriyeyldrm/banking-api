@@ -1,0 +1,7 @@
+{
+  "isError": false,
+  "referenceNumber": 1,
+  "accountNumber": 123,
+  "currencyCode":"TRY",
+  "balance":100.00
+}

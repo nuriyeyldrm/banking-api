@@ -1,0 +1,4 @@
+moneyTransfer\model\TransferTest.class
+moneyTransfer\model\AccountTest.class
+moneyTransfer\resources\TransferResourceTest.class
+moneyTransfer\resources\AccountResourceTest.class
