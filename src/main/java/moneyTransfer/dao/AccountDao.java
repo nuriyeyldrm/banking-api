@@ -36,4 +36,12 @@ public interface AccountDao {
     @SqlUpdate("UPDATE account SET balance = :balance WHERE accountNumber = :accountNumber")
     int updateBalance(@Bind("accountNumber")Integer accountNumber, @Bind("balance") double balance);
 
+    @SqlUpdate("UPDATE account SET accountNumber = :a.accountNumber," +
+            " currencyCode = :a.currencyCode," +
+            " balance = :a.balance WHERE accountNumber = :a.accountNumber")
+    int updateAccount(@BindBean("a") Account account);
+
+    @SqlUpdate("DELETE FROM account WHERE accountNumber = :accountNumber")
+    void deleteAccount(@Bind("accountNumber") int accountNumber);
+
 }
