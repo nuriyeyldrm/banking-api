@@ -6,13 +6,11 @@ import com.google.common.base.Objects;
 import io.dropwizard.validation.OneOf;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class Account {
 
-    private boolean isError;
-
-    private int referenceNumber;
-
+    @Positive(message = "Account Number must be positive")
     @NotNull(message = "Account Number must not be null")
     private Integer accountNumber;
 
@@ -30,24 +28,6 @@ public class Account {
         this.accountNumber = accountNumber;
         this.currencyCode = currencyCode;
         this.balance = balance;
-    }
-
-    public Account(boolean isError, int referenceNumber, Integer accountNumber, String currencyCode, Double balance) {
-        this.isError = isError;
-        this.referenceNumber = referenceNumber;
-        this.accountNumber = accountNumber;
-        this.currencyCode = currencyCode;
-        this.balance = balance;
-    }
-
-    @JsonProperty
-    public boolean getIsError() {
-        return isError;
-    }
-
-    @JsonProperty
-    public int getReferenceNumber() {
-        return referenceNumber;
     }
 
     @JsonProperty
@@ -72,15 +52,13 @@ public class Account {
 
         Account that = (Account) o;
 
-        return Objects.equal(this.isError, that.isError) &&
-                Objects.equal(this.referenceNumber, that.referenceNumber) &&
-                Objects.equal(this.accountNumber, that.accountNumber) &&
+        return Objects.equal(this.accountNumber, that.accountNumber) &&
                 Objects.equal(this.currencyCode, that.currencyCode) &&
                 Objects.equal(this.balance, that.balance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(isError, referenceNumber, accountNumber, currencyCode, balance);
+        return Objects.hashCode(accountNumber, currencyCode, balance);
     }
 }

@@ -16,7 +16,7 @@ public class TransferTest {
 
     @Test
     public void serializesToJSON() throws Exception {
-        Transfer transfer = new Transfer(false,250,123, 156,
+        Transfer transfer = new Transfer(123, 156,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
@@ -28,7 +28,7 @@ public class TransferTest {
 
     @Test
     public void deserializesFromJSON() throws Exception {
-        Transfer transfer = new Transfer(false,250,123, 156,
+        Transfer transfer = new Transfer(123, 156,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").toString());
 

@@ -11,10 +11,6 @@ import javax.validation.constraints.NotNull;
 
 public class Transfer {
 
-    private boolean isError;
-
-    private int referenceNumber;
-
     @NotNull(message = "Sender Account Number must not be null")
     private Integer senderAccountNumber;
 
@@ -36,26 +32,6 @@ public class Transfer {
         this.receiverAccountNumber = receiverAccountNumber;
         this.amount = amount;
         this.currencyCode = currencyCode;
-    }
-
-    public Transfer(boolean isError, int referenceNumber, Integer senderAccountNumber, Integer receiverAccountNumber,
-                    Double amount, String currencyCode) {
-        this.isError = isError;
-        this.referenceNumber = referenceNumber;
-        this.senderAccountNumber = senderAccountNumber;
-        this.receiverAccountNumber = receiverAccountNumber;
-        this.amount = amount;
-        this.currencyCode = currencyCode;
-    }
-
-    @JsonProperty
-    public boolean getIsError() {
-        return isError;
-    }
-
-    @JsonProperty
-    public int getReferenceNumber() {
-        return referenceNumber;
     }
 
     @JsonProperty
@@ -85,9 +61,7 @@ public class Transfer {
 
         Transfer that = (Transfer) o;
 
-        return Objects.equal(this.isError, that.isError) &&
-                Objects.equal(this.referenceNumber, that.referenceNumber) &&
-                Objects.equal(this.senderAccountNumber, that.senderAccountNumber) &&
+        return Objects.equal(this.senderAccountNumber, that.senderAccountNumber) &&
                 Objects.equal(this.receiverAccountNumber, that.receiverAccountNumber) &&
                 Objects.equal(this.amount, that.amount) &&
                 Objects.equal(this.currencyCode, that.currencyCode);
@@ -95,8 +69,7 @@ public class Transfer {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(isError, referenceNumber, senderAccountNumber, receiverAccountNumber, amount,
-                currencyCode);
+        return Objects.hashCode(senderAccountNumber, receiverAccountNumber, amount, currencyCode);
     }
 
     @JsonIgnore

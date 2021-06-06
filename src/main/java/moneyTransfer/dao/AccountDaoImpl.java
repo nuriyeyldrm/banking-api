@@ -10,9 +10,7 @@ import java.sql.SQLException;
 public class AccountDaoImpl implements ResultSetMapper<Account>{
     @Override
     public Account map(int n, ResultSet resultSet, StatementContext statementContext) throws SQLException {
-        return new Account(resultSet.getBoolean("isError"),
-                resultSet.getInt("referenceNumber"),
-                resultSet.getInt("accountNumber"),
+        return new Account(resultSet.getInt("accountNumber"),
                 resultSet.getString("currencyCode"),
                 resultSet.getDouble("balance"));
     }

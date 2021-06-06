@@ -16,7 +16,7 @@ public class AccountTest {
 
     @Test
     public void serializesToJSON() throws Exception {
-        final Account account = new Account(false,1,123, Currency.getInstance("TRY").getCurrencyCode(),
+        final Account account = new Account(123, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         final String expected = mapper.writeValueAsString(
@@ -27,7 +27,7 @@ public class AccountTest {
 
     @Test
     public void deserializesFromJSON() throws Exception {
-        final Account account = new Account(false,1,123, Currency.getInstance("TRY").toString(),
+        final Account account = new Account(123, Currency.getInstance("TRY").toString(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         assertThat(mapper.readValue(fixture("account.json"), Account.class)).isEqualTo(account);

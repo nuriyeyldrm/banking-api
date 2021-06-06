@@ -33,15 +33,14 @@ public class AccountResource {
     @POST
     @Timed
     public IsRef createAccount(@Valid Account account) {
-        final int refNum = isRefDao.createIsRef(new IsRef(true));
+        final int refNum = isRefDao.createIsRef(new IsRef(false));
         if (accountDao.getUserAccount(account.getAccountNumber(), account.getCurrencyCode()) != null){
-            throw new WebApplicationException("account with same currency already exists for user, referenceNumber: "
-                    + refNum, Http.OK.getCode());
+            throw new WebApplicationException("account with same currency already exists for user", Http.OK.getCode());
         }
 
-        final int accountReferenceNumber = accountDao.createAccount(account);
+        accountDao.createAccount(account);
 
-        return accountDao.getIsRef(accountReferenceNumber);
+        return isRefDao.getIsRef(refNum);
     }
 
     @POST
@@ -49,15 +48,13 @@ public class AccountResource {
     @Path("/test")
     // returns real account with all value
     public Account createAccountForTest(@Valid Account account) {
-        final int refNum = isRefDao.createIsRef(new IsRef(true));
         if (accountDao.getUserAccount(account.getAccountNumber(), account.getCurrencyCode()) != null){
-            throw new WebApplicationException("account with same currency already exists for user, referenceNumber: "
-                    + refNum, Http.OK.getCode());
+            throw new WebApplicationException("account with same currency already exists for user", Http.OK.getCode());
         }
 
-        final int accountReferenceNumber = accountDao.createAccount(account);
+        final int accountNumber = accountDao.createAccount(account);
 
-        return accountDao.getAccount(accountReferenceNumber);
+        return accountDao.getAccount(accountNumber);
     }
 
 }

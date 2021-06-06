@@ -3,9 +3,6 @@
     <properties maven-id="io.dropwizard.metrics:metrics-jdbi:4.1.0-rc3" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-jdbi/4.1.0-rc3/metrics-jdbi-4.1.0-rc3.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-core/4.1.0-rc3/metrics-core-4.1.0-rc3.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/jdbi/jdbi/2.78/jdbi-2.78.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/io/dropwizard/metrics/metrics-jdbi/4.1.0-rc3/metrics-jdbi-4.1.0-rc3-javadoc.jar!/" />

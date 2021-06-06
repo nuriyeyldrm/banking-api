@@ -46,14 +46,14 @@ public class TransferResourceTest {
 
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 156;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
-        Account senderAccount = new Account(false,1,123, Currency.getInstance("TRY").getCurrencyCode(),
+        Account senderAccount = new Account(123, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
-        Account receiverAccount = new Account(false,2,156, Currency.getInstance("TRY").getCurrencyCode(),
+        Account receiverAccount = new Account(156, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("150.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
 
@@ -82,14 +82,14 @@ public class TransferResourceTest {
     public void testTransferAmountGreaterThanSenderAmount() {
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 156;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("1000.00").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
-        Account senderAccount = new Account(false,1,123, Currency.getInstance("TRY").getCurrencyCode(),
+        Account senderAccount = new Account(123, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
-        Account receiverAccount = new Account(false,250,2, Currency.getInstance("TRY").getCurrencyCode(),
+        Account receiverAccount = new Account(2, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("150.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         when(accountDao.getAccountForUpdate(senderAccountNumber)).thenReturn(senderAccount);
@@ -103,14 +103,14 @@ public class TransferResourceTest {
     public void testTransferCurrencyAndSenderAccountCurrencyDoNotMatch() {
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 156;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("USD").getCurrencyCode());
 
-        Account senderAccount = new Account(false,1,123, Currency.getInstance("TRY").getCurrencyCode(),
+        Account senderAccount = new Account(123, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
-        Account receiverAccount = new Account(false,250,2, Currency.getInstance("TRY").getCurrencyCode(),
+        Account receiverAccount = new Account(2, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("150.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         when(accountDao.getAccountForUpdate(senderAccountNumber)).thenReturn(senderAccount);
@@ -124,14 +124,14 @@ public class TransferResourceTest {
     public void testTransferReceiverAccountCurrencyAndSenderAccountCurrencyDoNotMatch() {
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 156;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
-        Account senderAccount = new Account(false,1,123, Currency.getInstance("TRY").getCurrencyCode(),
+        Account senderAccount = new Account(123, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
-        Account receiverAccount = new Account(false,250,2, Currency.getInstance("USD").getCurrencyCode(),
+        Account receiverAccount = new Account(2, Currency.getInstance("USD").getCurrencyCode(),
                 new BigDecimal("150.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         when(accountDao.getAccountForUpdate(senderAccountNumber)).thenReturn(senderAccount);
@@ -145,7 +145,7 @@ public class TransferResourceTest {
     public void testTransferSameSenderAccountAndReceiverAccount() {
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 123;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
@@ -160,11 +160,11 @@ public class TransferResourceTest {
     public void testTransferSenderAccountDoesNotExist() {
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 156;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
-        Account receiverAccount = new Account(false,250,2, Currency.getInstance("TRY").getCurrencyCode(),
+        Account receiverAccount = new Account(2, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("150.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         when(accountDao.getAccountForUpdate(senderAccountNumber)).thenReturn(null);
@@ -178,11 +178,11 @@ public class TransferResourceTest {
     public void testTransferReceiverAccountDoesNotExist() {
         Integer senderAccountNumber = 123;
         Integer receiverAccountNumber = 156;
-        Transfer transfer = new Transfer(false,250, senderAccountNumber, receiverAccountNumber,
+        Transfer transfer = new Transfer(senderAccountNumber, receiverAccountNumber,
                 new BigDecimal("23.45").setScale(2, RoundingMode.FLOOR).doubleValue(),
                 Currency.getInstance("TRY").getCurrencyCode());
 
-        Account senderAccount = new Account(false,1,123, Currency.getInstance("TRY").getCurrencyCode(),
+        Account senderAccount = new Account(123, Currency.getInstance("TRY").getCurrencyCode(),
                 new BigDecimal("100.00").setScale(2, RoundingMode.FLOOR).doubleValue());
 
         when(accountDao.getAccountForUpdate(senderAccountNumber)).thenReturn(senderAccount);

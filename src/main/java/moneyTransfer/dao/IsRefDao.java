@@ -1,10 +1,7 @@
 package moneyTransfer.dao;
 
 import moneyTransfer.model.IsRef;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.Transaction;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 @RegisterMapper(IsRefDaoImpl.class)
@@ -14,6 +11,9 @@ public interface IsRefDao {
             " isError BOOLEAN," +
             " PRIMARY KEY (referenceNumber))")
     void createTable();
+
+    @SqlQuery("SELECT referenceNumber, isError FROM isRef WHERE referenceNumber = :referenceNumber")
+    IsRef getIsRef(@Bind("referenceNumber") int referenceNumber);
 
     @SqlUpdate("INSERT INTO isRef (isError) " +
             "values (:ir.isError)")

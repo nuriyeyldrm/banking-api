@@ -43,32 +43,27 @@ public class TransferResource {
     public IsRef createTransfer(@Valid Transfer transfer) {
         final Account senderAccount = accountDao.getAccountForUpdate(transfer.getSenderAccountNumber());
         final Account receiverAccount = accountDao.getAccountForUpdate(transfer.getReceiverAccountNumber());
-        final int refNum = isRefDao.createIsRef(new IsRef(true));
+        final int refNum = isRefDao.createIsRef(new IsRef(false));
 
 
         if (senderAccount == null) {
-            throw new WebApplicationException("sender account not found, referenceNumber: "
-                    + refNum , Http.OK.getCode());
+            throw new WebApplicationException("sender account not found", Http.OK.getCode());
         }
 
         if (receiverAccount == null) {
-            throw new WebApplicationException("receiver account not found, referenceNumber: "
-                    + refNum , Http.OK.getCode());
+            throw new WebApplicationException("receiver account not found", Http.OK.getCode());
         }
 
         if (!transfer.getCurrencyCode().equals(senderAccount.getCurrencyCode())){
-            throw new WebApplicationException("currencies do not match, referenceNumber: "
-                    + refNum , Http.OK.getCode());
+            throw new WebApplicationException("currencies do not match", Http.OK.getCode());
         }
 
         if (!senderAccount.getCurrencyCode().equals(receiverAccount.getCurrencyCode())){
-            throw new WebApplicationException("account currencies do not match, referenceNumber: "
-                    + refNum , Http.OK.getCode());
+            throw new WebApplicationException("account currencies do not match", Http.OK.getCode());
         }
 
         if (transfer.getAmount() > senderAccount.getBalance()){
-            throw new WebApplicationException("not enough funds available for transfer, referenceNumber: "
-                    + refNum , Http.OK.getCode());
+            throw new WebApplicationException("not enough funds available for transfer", Http.OK.getCode());
         }
 
         final BigDecimal newSenderAmount = BigDecimal.valueOf(senderAccount.getBalance())
@@ -82,8 +77,8 @@ public class TransferResource {
         accountDao.updateBalance(transfer.getSenderAccountNumber(), newSenderAmount.doubleValue());
         accountDao.updateBalance(transfer.getReceiverAccountNumber(), newReceiverAmount.doubleValue());
 
-        final int accountReferenceNumber = transferDao.createTransfer(transfer);
-        return transferDao.getIsRef(accountReferenceNumber);
+        transferDao.createTransfer(transfer);
+        return isRefDao.getIsRef(refNum);
     }
 
 }
