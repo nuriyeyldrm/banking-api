@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import moneyTransfer.dao.AccountDao;
 import moneyTransfer.dao.IsRefDao;
 import moneyTransfer.dao.TransferDao;
-import moneyTransfer.enums.Http;
+import moneyTransfer.enums.HttpStatus;
 import moneyTransfer.model.Account;
 import moneyTransfer.model.IsRef;
 import moneyTransfer.model.Transfer;
@@ -47,23 +47,23 @@ public class TransferResource {
 
 
         if (senderAccount == null) {
-            throw new WebApplicationException("sender account not found", Http.OK.getCode());
+            throw new WebApplicationException("sender account not found", HttpStatus.OK.getCode());
         }
 
         if (receiverAccount == null) {
-            throw new WebApplicationException("receiver account not found", Http.OK.getCode());
+            throw new WebApplicationException("receiver account not found", HttpStatus.OK.getCode());
         }
 
         if (!transfer.getCurrencyCode().equals(senderAccount.getCurrencyCode())){
-            throw new WebApplicationException("currencies do not match", Http.OK.getCode());
+            throw new WebApplicationException("currencies do not match", HttpStatus.OK.getCode());
         }
 
         if (!senderAccount.getCurrencyCode().equals(receiverAccount.getCurrencyCode())){
-            throw new WebApplicationException("account currencies do not match", Http.OK.getCode());
+            throw new WebApplicationException("account currencies do not match", HttpStatus.OK.getCode());
         }
 
         if (transfer.getAmount() > senderAccount.getBalance()){
-            throw new WebApplicationException("not enough funds available for transfer", Http.OK.getCode());
+            throw new WebApplicationException("not enough funds available for transfer", HttpStatus.OK.getCode());
         }
 
         final BigDecimal newSenderAmount = BigDecimal.valueOf(senderAccount.getBalance())

@@ -5,7 +5,7 @@
   <artifactId>banking_api</artifactId>
   <name>banking_api</name>
   <version>1.0.0-SNAPSHOT</version>
-  <url>http://maven.apache.org</url>
+  <url>https://maven.apache.org</url>
   <build>
     <plugins>
       <plugin>

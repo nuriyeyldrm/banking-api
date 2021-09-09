@@ -1,5 +1,6 @@
 package moneyTransfer.dao;
 
+import moneyTransfer.dao.mapper.IsRefDaoImpl;
 import moneyTransfer.model.IsRef;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;

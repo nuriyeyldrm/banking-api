@@ -1,27 +1,24 @@
 package moneyTransfer.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.google.common.base.Objects;
-import io.dropwizard.validation.OneOf;
-import io.dropwizard.validation.ValidationMethod;
+import io.dropwizard.validation.*;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class Transfer {
 
-    @NotNull(message = "Sender Account Number must not be null")
+    @NotNull(message = " must not be null")
     private Integer senderAccountNumber;
 
-    @NotNull(message = "Receiver Account Number must not be null")
+    @NotNull(message = " must not be null")
     private Integer receiverAccountNumber;
 
-    @NotNull(message = "Amount must not be null")
+    @NotNull(message = " must not be null")
     @DecimalMin("0.01")
     private Double amount;
 
-    @NotNull(message = "Currency Code must not be null")
+    @NotNull(message = " must not be null")
     @OneOf({"TRY","USD","EUR"})
     private String currencyCode;
 

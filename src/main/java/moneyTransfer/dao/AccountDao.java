@@ -1,5 +1,6 @@
 package moneyTransfer.dao;
 
+import moneyTransfer.dao.mapper.AccountDaoImpl;
 import moneyTransfer.model.Account;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;

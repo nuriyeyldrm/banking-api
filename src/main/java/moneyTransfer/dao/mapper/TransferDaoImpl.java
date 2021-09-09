@@ -1,4 +1,4 @@
-package moneyTransfer.dao;
+package moneyTransfer.dao.mapper;
 
 import moneyTransfer.model.Transfer;
 import org.skife.jdbi.v2.StatementContext;

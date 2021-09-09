@@ -5,7 +5,7 @@ import io.dropwizard.testing.junit.ResourceTestRule;
 import moneyTransfer.dao.AccountDao;
 import moneyTransfer.dao.IsRefDao;
 import moneyTransfer.dao.TransferDao;
-import moneyTransfer.enums.Http;
+import moneyTransfer.enums.HttpStatus;
 import moneyTransfer.model.Account;
 import moneyTransfer.model.Transfer;
 import org.junit.After;
@@ -96,7 +96,7 @@ public class TransferResourceTest {
         when(accountDao.getAccountForUpdate(receiverAccountNumber)).thenReturn(receiverAccount);
 
         final Response post = resources.client().target("/transfers").request().post(Entity.json(transfer));
-        assertThat(post.getStatus()).isEqualTo(Http.OK.getCode());
+        assertThat(post.getStatus()).isEqualTo(HttpStatus.OK.getCode());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class TransferResourceTest {
         when(accountDao.getAccountForUpdate(receiverAccountNumber)).thenReturn(receiverAccount);
 
         final Response post = resources.client().target("/transfers").request().post(Entity.json(transfer));
-        assertThat(post.getStatus()).isEqualTo(Http.OK.getCode());
+        assertThat(post.getStatus()).isEqualTo(HttpStatus.OK.getCode());
     }
 
     @Test
@@ -138,7 +138,7 @@ public class TransferResourceTest {
         when(accountDao.getAccountForUpdate(receiverAccountNumber)).thenReturn(receiverAccount);
 
         final Response post = resources.client().target("/transfers").request().post(Entity.json(transfer));
-        assertThat(post.getStatus()).isEqualTo(Http.OK.getCode());
+        assertThat(post.getStatus()).isEqualTo(HttpStatus.OK.getCode());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class TransferResourceTest {
         when(accountDao.getAccountForUpdate(receiverAccountNumber)).thenReturn(receiverAccount);
 
         final Response post = resources.client().target("/transfers").request().post(Entity.json(transfer));
-        assertThat(post.getStatus()).isEqualTo(Http.OK.getCode());
+        assertThat(post.getStatus()).isEqualTo(HttpStatus.OK.getCode());
     }
 
     @Test
@@ -189,6 +189,6 @@ public class TransferResourceTest {
         when(accountDao.getAccountForUpdate(receiverAccountNumber)).thenReturn(null);
 
         final Response post = resources.client().target("/transfers").request().post(Entity.json(transfer));
-        assertThat(post.getStatus()).isEqualTo(Http.OK.getCode());
+        assertThat(post.getStatus()).isEqualTo(HttpStatus.OK.getCode());
     }
 }

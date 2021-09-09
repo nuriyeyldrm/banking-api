@@ -1,4 +1,4 @@
-package moneyTransfer.dao;
+package moneyTransfer.dao.mapper;
 
 import moneyTransfer.model.Account;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;

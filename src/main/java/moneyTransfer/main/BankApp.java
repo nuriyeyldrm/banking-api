@@ -4,7 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import moneyTransfer.dao.AccountDao;
-import moneyTransfer.dao.DbConfig;
+import moneyTransfer.config.DbConfig;
 import moneyTransfer.dao.IsRefDao;
 import moneyTransfer.dao.TransferDao;
 import moneyTransfer.model.Account;

@@ -1,24 +1,22 @@
 package moneyTransfer.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.google.common.base.Objects;
 import io.dropwizard.validation.OneOf;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 public class Account {
 
-    @Positive(message = "Account Number must be positive")
+    @Positive(message = " must be positive")
     @NotNull(message = "Account Number must not be null")
     private Integer accountNumber;
 
-    @NotNull(message = "Currency Code must not be null")
+    @NotNull(message = " must not be null")
     @OneOf({"TRY","USD","EUR"})
     private String currencyCode;
 
-    @NotNull(message = "Balance must not be null")
+    @NotNull(message = " must not be null")
     private Double balance;
 
     @JsonCreator

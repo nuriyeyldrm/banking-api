@@ -3,7 +3,7 @@ package moneyTransfer.resources;
 import com.codahale.metrics.annotation.Timed;
 import moneyTransfer.dao.AccountDao;
 import moneyTransfer.dao.IsRefDao;
-import moneyTransfer.enums.Http;
+import moneyTransfer.enums.HttpStatus;
 import moneyTransfer.model.Account;
 import moneyTransfer.model.IsRef;
 
@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/accounts")
@@ -44,7 +43,8 @@ public class AccountResource {
     public IsRef createAccount(@Valid Account account) {
         final int refNum = isRefDao.createIsRef(new IsRef(false));
         if (accountDao.getUserAccount(account.getAccountNumber(), account.getCurrencyCode()) != null){
-            throw new WebApplicationException("account with same currency already exists for user", Http.OK.getCode());
+            throw new WebApplicationException("account with same currency already exists for user",
+                    HttpStatus.CONFLICT.getCode());
         }
 
         accountDao.createAccount(account);
@@ -57,32 +57,15 @@ public class AccountResource {
     @Path("/{accountNumber}")
     public IsRef updateAccount(@PathParam("accountNumber") @NotNull int accountNumber, @Valid Account account){
         final int refNum = isRefDao.createIsRef(new IsRef(false));
-        if(accountNumber != account.getAccountNumber()){
-            throw new WebApplicationException("accountNumber mismatch", Response.Status.BAD_REQUEST);
-        }
 
         final Account account1 = accountDao.getAccount(accountNumber);
 
         if (account1 == null){
-            throw new WebApplicationException("account not found", Http.OK.getCode());
+            throw new WebApplicationException("account not found", HttpStatus.NOT_FOUND.getCode());
         }
 
         accountDao.updateAccount(account);
         return isRefDao.getIsRef(refNum);
-    }
-
-    @POST
-    @Timed
-    @Path("/test")
-    // returns real account with all value
-    public Account createAccountForTest(@Valid Account account) {
-        if (accountDao.getUserAccount(account.getAccountNumber(), account.getCurrencyCode()) != null){
-            throw new WebApplicationException("account with same currency already exists for user", Http.OK.getCode());
-        }
-
-        final int accountNumber = accountDao.createAccount(account);
-
-        return accountDao.getAccount(accountNumber);
     }
 
     @DELETE
