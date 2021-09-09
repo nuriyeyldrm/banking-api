@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: moneyTransfer.resources.AccountResourceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.366 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.411 sec
