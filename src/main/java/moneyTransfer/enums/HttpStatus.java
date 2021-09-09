@@ -2,6 +2,7 @@ package moneyTransfer.enums;
 
 public enum HttpStatus {
 
+    // http status
     OK(200, "OK"),
     BAD_REQUEST(400, "BAD_REQUEST"),
     UNAUTHORIZED(401, "UNAUTHORIZED"),
